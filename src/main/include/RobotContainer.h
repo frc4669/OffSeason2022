@@ -5,6 +5,11 @@
 #pragma once
 
 #include <frc2/command/Command.h>
+#include <frc2/command/RunCommand.h>
+
+#include <controllers/GamepadF310.h>
+
+#include <subsystems/Drivetrain.h>
 
 #include "commands/ExampleCommand.h"
 #include "subsystems/ExampleSubsystem.h"
@@ -26,6 +31,10 @@ class RobotContainer {
   // The robot's subsystems and commands are defined here...
   ExampleSubsystem m_subsystem;
   ExampleCommand m_autonomousCommand;
+
+  Drivetrain m_drivetrain;
+
+  GamepadF310 m_f310 { 0 };
 
   void ConfigureButtonBindings();
 };

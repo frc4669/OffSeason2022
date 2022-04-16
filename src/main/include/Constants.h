@@ -13,3 +13,14 @@
  * command-specific namespaces within this header, which can then be used where
  * they are needed.
  */
+
+namespace CAN {
+    constexpr int kFrontMotorID = 2384; // PLACEHOLDER NUMBER
+    constexpr int kRearMotorID = 2398; // PLACEHOLDER NUMBER
+    constexpr int kLeftMotorID = 3248; // PLACEHOLDER NUMBER
+    constexpr int kRightMotorID = 3894; // PLACEHOLDER NUMBER
+}
+
+namespace DriveConstants {
+    constexpr double kJoystickMultiplier = 0.5;
+}
