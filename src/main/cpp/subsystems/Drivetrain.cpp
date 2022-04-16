@@ -10,13 +10,19 @@ Drivetrain::Drivetrain() = default;
 void Drivetrain::Periodic() {}
 
 void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJoyY, double leftJoyX) {
-    double rightOutput = -rightJoyY * DriveConstants::kJoystickMultiplier;
-    double leftOutput = rightJoyY * DriveConstants::kJoystickMultiplier;
+    double joyTurn = leftJoyX * DriveConstants::kJoystickMultiplier;
 
-    double frontOutput = rightJoyX * DriveConstants::kJoystickMultiplier;
-    double rearOutput = -rightJoyX * DriveConstants::kJoystickMultiplier;
+    double rightOutput = (-rightJoyY * DriveConstants::kJoystickMultiplier) + joyTurn; // Right motor output (oriented forward)
+    rightOutput = std::clamp<double>(rightOutput, -1.0, 1.0);
 
-    
+    double leftOutput = (rightJoyY * DriveConstants::kJoystickMultiplier) + joyTurn; // Left motor output (oriented forward)
+    leftOutput = std::clamp<double>(leftOutput, -1.0, 1.0);
+
+    double frontOutput = (rightJoyX * DriveConstants::kJoystickMultiplier) + joyTurn; // Front motor output (oriented horizontally)
+    frontOutput = std::clamp<double>(frontOutput, -1.0, 1.0);
+
+    double rearOutput = (-rightJoyX * DriveConstants::kJoystickMultiplier) + joyTurn; // Rear motor output (oriented horizontally)
+    rearOutput = std::clamp<double>(rearOutput, -1.0, 1.0);
 
     m_left.Set(TalonSRXControlMode::PercentOutput, rightOutput);
     m_right.Set(TalonSRXControlMode::PercentOutput, leftOutput);
