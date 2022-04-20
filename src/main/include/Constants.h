@@ -15,10 +15,10 @@
  */
 
 namespace CAN {
-    constexpr int kFrontMotorID = 2384; // PLACEHOLDER NUMBER
-    constexpr int kRearMotorID = 2398; // PLACEHOLDER NUMBER
-    constexpr int kLeftMotorID = 3248; // PLACEHOLDER NUMBER
-    constexpr int kRightMotorID = 3894; // PLACEHOLDER NUMBER
+    constexpr int kFrontMotorID = 1; // PLACEHOLDER NUMBER
+    constexpr int kRearMotorID = 3; // PLACEHOLDER NUMBER
+    constexpr int kLeftMotorID = 4; // PLACEHOLDER NUMBER
+    constexpr int kRightMotorID = 2; // PLACEHOLDER NUMBER
 }
 
 namespace DriveConstants {

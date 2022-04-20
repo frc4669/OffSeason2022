@@ -2,6 +2,9 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+
 #include "subsystems/Drivetrain.h"
 
 Drivetrain::Drivetrain() = default;
@@ -10,6 +13,11 @@ Drivetrain::Drivetrain() = default;
 void Drivetrain::Periodic() {}
 
 void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJoyY, double leftJoyX) {
+    frc::SmartDashboard::PutNumber("RIGHT X", rightJoyX);
+    frc::SmartDashboard::PutNumber("RIGHT Y", rightJoyY);
+    frc::SmartDashboard::PutNumber("LEFT X", leftJoyX);
+    frc::SmartDashboard::PutNumber("LEFT Y", leftJoyY);
+
     double joyTurn = leftJoyX * DriveConstants::kJoystickMultiplier;
 
     double rightOutput = (-rightJoyY * DriveConstants::kJoystickMultiplier) + joyTurn; // Right motor output (oriented forward)
@@ -23,6 +31,11 @@ void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJo
 
     double rearOutput = (-rightJoyX * DriveConstants::kJoystickMultiplier) + joyTurn; // Rear motor output (oriented horizontally)
     rearOutput = std::clamp<double>(rearOutput, -1.0, 1.0);
+
+    frc::SmartDashboard::PutNumber("FRONT", frontOutput);
+    frc::SmartDashboard::PutNumber("REAR", rearOutput);
+    frc::SmartDashboard::PutNumber("LEFT", leftOutput);
+    frc::SmartDashboard::PutNumber("RIGHT", rightOutput);
 
     m_left.Set(TalonSRXControlMode::PercentOutput, rightOutput);
     m_right.Set(TalonSRXControlMode::PercentOutput, leftOutput);
