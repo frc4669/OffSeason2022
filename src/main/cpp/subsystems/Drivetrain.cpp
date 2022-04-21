@@ -13,10 +13,11 @@ Drivetrain::Drivetrain() = default;
 void Drivetrain::Periodic() {}
 
 void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJoyY, double leftJoyX) {
-    frc::SmartDashboard::PutNumber("RIGHT X", rightJoyX);
+    /*frc::SmartDashboard::PutNumber("RIGHT X", rightJoyX);
     frc::SmartDashboard::PutNumber("RIGHT Y", rightJoyY);
     frc::SmartDashboard::PutNumber("LEFT X", leftJoyX);
     frc::SmartDashboard::PutNumber("LEFT Y", leftJoyY);
+    frc::SmartDashboard::PutNumber("TURN", leftJoyX * DriveConstants::kJoystickMultiplier);*/
 
     double joyTurn = leftJoyX * DriveConstants::kJoystickMultiplier;
 
@@ -32,10 +33,10 @@ void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJo
     double rearOutput = (-rightJoyX * DriveConstants::kJoystickMultiplier) + joyTurn; // Rear motor output (oriented horizontally)
     rearOutput = std::clamp<double>(rearOutput, -1.0, 1.0);
 
-    frc::SmartDashboard::PutNumber("FRONT", frontOutput);
-    frc::SmartDashboard::PutNumber("REAR", rearOutput);
-    frc::SmartDashboard::PutNumber("LEFT", leftOutput);
-    frc::SmartDashboard::PutNumber("RIGHT", rightOutput);
+    frc::SmartDashboard::PutNumber("FRONT OUT", frontOutput);
+    frc::SmartDashboard::PutNumber("REAR OUT", rearOutput);
+    frc::SmartDashboard::PutNumber("LEFT OUT", leftOutput);
+    frc::SmartDashboard::PutNumber("RIGHT OUT", rightOutput);
 
     m_left.Set(TalonSRXControlMode::PercentOutput, rightOutput);
     m_right.Set(TalonSRXControlMode::PercentOutput, leftOutput);
