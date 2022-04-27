@@ -8,7 +8,7 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
 
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
-    [this] { m_drivetrain.JoystickDrive(m_f310.getRightJoyX(), m_f310.getRightJoyY(), m_f310.getLeftJoyY(), m_f310.getLeftJoyX()); },
+    [this] { m_drivetrain.FieldOrientedJoystickDrive(m_f310.getRightJoyX(), m_f310.getRightJoyY(), m_f310.getLeftJoyY(), m_f310.getLeftJoyX()); },
     { &m_drivetrain }
   ));
 

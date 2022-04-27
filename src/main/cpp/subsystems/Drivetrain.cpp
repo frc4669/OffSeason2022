@@ -12,6 +12,14 @@ Drivetrain::Drivetrain() = default;
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {}
 
+void Drivetrain::ResetIMU() {
+    m_imu.Reset();
+}
+
+units::degree_t Drivetrain::GetIMUAngle() {
+    return m_imu.GetAngle();
+}
+
 void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJoyY, double leftJoyX) {
     /*frc::SmartDashboard::PutNumber("RIGHT X", rightJoyX);
     frc::SmartDashboard::PutNumber("RIGHT Y", rightJoyY);
@@ -43,4 +51,18 @@ void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJo
 
     m_front.Set(TalonSRXControlMode::PercentOutput, frontOutput);
     m_rear.Set(TalonSRXControlMode::PercentOutput, rearOutput);
+}
+
+void Drivetrain::FieldOrientedJoystickDrive(double rightJoyX, double rightJoyY, double leftJoyX, double leftJoyY) {
+    double IMUAngle = GetIMUAngle().value();
+
+    double joystickAngle = atan(rightJoyY / rightJoyX);
+    double hypotenuse = sqrt(pow(rightJoyX, 2) + pow(rightJoyY, 2));
+
+    double newAngle = joystickAngle - IMUAngle;
+
+    double newX = hypotenuse * cos(newAngle);
+    double newY = hypotenuse * sin(newAngle);
+
+    JoystickDrive(newX, newY, leftJoyX, leftJoyY);
 }
