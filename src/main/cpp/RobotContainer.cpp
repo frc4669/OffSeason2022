@@ -4,6 +4,8 @@
 
 #include "RobotContainer.h"
 
+#include <commands/ResetIMU.h>
+
 RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
   // Initialize all of your commands and subsystems here
 
@@ -18,6 +20,8 @@ RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
 
 void RobotContainer::ConfigureButtonBindings() {
   // Configure your button bindings here
+
+  m_f310.redButton.WhenPressed( ResetIMU(&m_drivetrain) );
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
