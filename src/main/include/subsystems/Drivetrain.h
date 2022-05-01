@@ -4,11 +4,12 @@
 
 #pragma once
 
-#include <frc2/command/SubsystemBase.h>
 #include <ctre/Phoenix.h>
-#include <Constants.h>
-
 #include <frc/ADIS16470_IMU.h>
+
+#include <frc2/command/SubsystemBase.h>
+
+#include <Constants.h>
 
 class Drivetrain : public frc2::SubsystemBase {
  public:
@@ -29,10 +30,10 @@ class Drivetrain : public frc2::SubsystemBase {
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 
-  WPI_TalonSRX m_front { CAN::kFrontMotorID };
-  WPI_TalonSRX m_left { CAN::kLeftMotorID };
-  WPI_TalonSRX m_right { CAN::kRightMotorID };
-  WPI_TalonSRX m_rear { CAN::kRearMotorID };
+  WPI_TalonSRX m_front{ CAN::kFrontMotor };
+  WPI_TalonSRX m_left{ CAN::kLeftMotor };
+  WPI_TalonSRX m_right{ CAN::kRightMotor };
+  WPI_TalonSRX m_rear{ CAN::kRearMotor };
 
-  frc::ADIS16470_IMU m_imu { };
+  frc::ADIS16470_IMU m_imu{ };
 };

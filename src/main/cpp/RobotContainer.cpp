@@ -8,8 +8,9 @@
 
 RobotContainer::RobotContainer() {
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
-    [this] { m_drivetrain.FieldOrientedJoystickDrive(m_f310.getRightJoyX(), m_f310.getRightJoyY(), m_f310.getLeftJoyY(), m_f310.getLeftJoyX()); },
-    { &m_drivetrain }
+    [this] 
+      { m_drivetrain.FieldOrientedJoystickDrive(m_f310.getRightJoyX(), m_f310.getRightJoyY(), m_f310.getLeftJoyY(), m_f310.getLeftJoyX()); },
+      { &m_drivetrain }
   ));
 
   // Configure the button bindings
@@ -24,7 +25,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  return &m_autonomousCommand;
+  return nullptr;
 }
 
 Drivetrain* RobotContainer::GetDrivetrain() {
