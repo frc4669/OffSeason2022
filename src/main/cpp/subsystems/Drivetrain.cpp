@@ -7,7 +7,9 @@
 
 #include "subsystems/Drivetrain.h"
 
-Drivetrain::Drivetrain() = default;
+Drivetrain::Drivetrain() {
+    m_imu.Calibrate();  // Calibrates the IMU, takes a few seconds -- important to not move robot
+}
 
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {}
