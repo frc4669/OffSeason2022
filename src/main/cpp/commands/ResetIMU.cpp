@@ -23,5 +23,5 @@ void ResetIMU::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool ResetIMU::IsFinished() {
-  return false;
+  return true; // not sure if this is how i make the command instantaneously end after initialize()
 }

@@ -54,10 +54,10 @@ void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJo
 }
 
 void Drivetrain::FieldOrientedJoystickDrive(double rightJoyX, double rightJoyY, double leftJoyX, double leftJoyY) {
-    double IMUAngle = GetIMUAngle().value();
+    double IMUAngle = units::radian_t(GetIMUAngle()).value();
 
-    double joystickAngle = atan(rightJoyY / rightJoyX);
-    double hypotenuse = sqrt(pow(rightJoyX, 2) + pow(rightJoyY, 2));
+    double joystickAngle = atan2(rightJoyY, rightJoyX);
+    double hypotenuse = hypot(rightJoyX, rightJoyY);
 
     double newAngle = joystickAngle - IMUAngle;
 
@@ -65,4 +65,12 @@ void Drivetrain::FieldOrientedJoystickDrive(double rightJoyX, double rightJoyY, 
     double newY = hypotenuse * sin(newAngle);
 
     JoystickDrive(newX, newY, leftJoyX, leftJoyY);
+}
+
+void Drivetrain::ToggleFieldOriented() {
+    fieldOriented = !fieldOriented;
+}
+
+bool Drivetrain::IsFieldOriented() {
+    return fieldOriented;
 }

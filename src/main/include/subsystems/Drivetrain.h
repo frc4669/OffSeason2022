@@ -22,6 +22,9 @@ class Drivetrain : public frc2::SubsystemBase {
   void JoystickDrive(double rightJoyX, double rightJoyY, double leftJoyX, double leftJoyY);
   void FieldOrientedJoystickDrive(double rightJoyX, double rightJoyY, double leftJoyX, double leftJoyY);
 
+  void ToggleFieldOriented();
+  bool IsFieldOriented();
+
   void ResetIMU();
   units::degree_t GetIMUAngle();
 
@@ -35,4 +38,6 @@ class Drivetrain : public frc2::SubsystemBase {
   WPI_TalonSRX m_rear { CAN::kRearMotorID };
 
   frc::ADIS16470_IMU m_imu { };
+
+  bool fieldOriented = true;
 };
