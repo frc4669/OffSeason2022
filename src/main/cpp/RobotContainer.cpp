@@ -6,9 +6,7 @@
 
 #include <commands/ResetIMU.h>
 
-RobotContainer::RobotContainer() : m_autonomousCommand(&m_subsystem) {
-  // Initialize all of your commands and subsystems here
-
+RobotContainer::RobotContainer() {
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
     [this] { 
       if (m_drivetrain.IsFieldOriented()) { m_drivetrain.FieldOrientedJoystickDrive(m_f310.getLeftJoyX(), -m_f310.getLeftJoyY(), m_f310.getRightJoyY(), m_f310.getRightJoyX()); }
@@ -36,5 +34,9 @@ void RobotContainer::ConfigureButtonBindings() {
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
-  return &m_autonomousCommand;
+  return nullptr;
+}
+
+Drivetrain* RobotContainer::GetDrivetrain() {
+  return &m_drivetrain;
 }
