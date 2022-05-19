@@ -29,18 +29,18 @@ void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJo
   frc::SmartDashboard::PutNumber("LEFT Y", leftJoyY);
   frc::SmartDashboard::PutNumber("TURN", leftJoyX * DriveConstants::kJoystickMultiplier);*/
 
-  double joyTurn = leftJoyX * DriveConstants::kJoystickMultiplier;
+  double joyTurn = leftJoyX * DriveConstants::kTurnMultiplier;
 
-  double rightOutput = (-rightJoyY * DriveConstants::kJoystickMultiplier) + joyTurn; // Right motor output (oriented forward)
+  double rightOutput = (-rightJoyY * DriveConstants::kMoveMultiplier) + joyTurn; // Right motor output (oriented forward)
   rightOutput = std::clamp<double>(rightOutput, -1.0, 1.0);
 
-  double leftOutput = (rightJoyY * DriveConstants::kJoystickMultiplier) + joyTurn; // Left motor output (oriented forward)
+  double leftOutput = (rightJoyY * DriveConstants::kMoveMultiplier) + joyTurn; // Left motor output (oriented forward)
   leftOutput = std::clamp<double>(leftOutput, -1.0, 1.0);
 
-  double frontOutput = (rightJoyX * DriveConstants::kJoystickMultiplier) + joyTurn; // Front motor output (oriented horizontally)
+  double frontOutput = (rightJoyX * DriveConstants::kMoveMultiplier) + joyTurn; // Front motor output (oriented horizontally)
   frontOutput = std::clamp<double>(frontOutput, -1.0, 1.0);
 
-  double rearOutput = (-rightJoyX * DriveConstants::kJoystickMultiplier) + joyTurn; // Rear motor output (oriented horizontally)
+  double rearOutput = (-rightJoyX * DriveConstants::kMoveMultiplier) + joyTurn; // Rear motor output (oriented horizontally)
   rearOutput = std::clamp<double>(rearOutput, -1.0, 1.0);
 
   frc::SmartDashboard::PutNumber("FRONT OUT", frontOutput);

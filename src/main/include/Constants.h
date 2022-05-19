@@ -12,5 +12,6 @@ namespace CAN {
 }
 
 namespace DriveConstants {
-  constexpr double kJoystickMultiplier = 0.5;
+  constexpr double kMoveMultiplier = 0.4;
+  constexpr double kTurnMultiplier = 0.25;
 }
