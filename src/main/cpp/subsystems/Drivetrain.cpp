@@ -4,6 +4,7 @@
 
 #include <frc/shuffleboard/Shuffleboard.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <units/constants.h>
 
 #include "subsystems/Drivetrain.h"
 
@@ -43,10 +44,10 @@ void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJo
   double rearOutput = (-rightJoyX * DriveConstants::kMoveMultiplier) + joyTurn; // Rear motor output (oriented horizontally)
   rearOutput = std::clamp<double>(rearOutput, -1.0, 1.0);
 
-  frc::SmartDashboard::PutNumber("FRONT OUT", frontOutput);
+  /*frc::SmartDashboard::PutNumber("FRONT OUT", frontOutput);
   frc::SmartDashboard::PutNumber("REAR OUT", rearOutput);
   frc::SmartDashboard::PutNumber("LEFT OUT", leftOutput);
-  frc::SmartDashboard::PutNumber("RIGHT OUT", rightOutput);
+  frc::SmartDashboard::PutNumber("RIGHT OUT", rightOutput);*/
 
   m_left.Set(TalonSRXControlMode::PercentOutput, rightOutput);
   m_right.Set(TalonSRXControlMode::PercentOutput, leftOutput);
@@ -57,14 +58,21 @@ void Drivetrain::JoystickDrive(double rightJoyX, double rightJoyY, double leftJo
 
 void Drivetrain::FieldOrientedJoystickDrive(double rightJoyX, double rightJoyY, double leftJoyX, double leftJoyY) {
   double IMUAngle = units::radian_t(GetIMUAngle()).value();
+  frc::SmartDashboard::PutNumber("IMU ANGLE", GetIMUAngle().value());
 
   double joystickAngle = atan2(rightJoyY, rightJoyX);
   double hypotenuse = hypot(rightJoyX, rightJoyY);
+  frc::SmartDashboard::PutNumber("JOYSTICK ANGLE", joystickAngle);
+  frc::SmartDashboard::PutNumber("HYPOTENUSE", hypotenuse);
 
   double newAngle = joystickAngle - IMUAngle;
+  frc::SmartDashboard::PutNumber("FIELD ORIENTED ANGLE", (newAngle * 180.0 / units::constants::pi));
 
   double newX = hypotenuse * cos(newAngle);
   double newY = hypotenuse * sin(newAngle);
+  frc::SmartDashboard::PutNumber("FIELD ORIENTED X", newX);
+  frc::SmartDashboard::PutNumber("FIELD ORIENTED Y", newY);
+  frc::SmartDashboard::PutNumber("FIELD ORIENTED TURN", leftJoyX);
 
   JoystickDrive(newX, newY, leftJoyX, leftJoyY);
 }

@@ -4,11 +4,15 @@
 
 #include "RobotContainer.h"
 
+#include <frc/shuffleboard/Shuffleboard.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+
 #include <commands/ResetIMU.h>
 
 RobotContainer::RobotContainer() {
   m_drivetrain.SetDefaultCommand(frc2::RunCommand(
-    [this] { 
+    [this] {
+      frc::SmartDashboard::PutBoolean("FIELD ORIENTED", m_drivetrain.IsFieldOriented()); 
       if (m_drivetrain.IsFieldOriented()) { m_drivetrain.FieldOrientedJoystickDrive(m_f310.getLeftJoyX(), -m_f310.getLeftJoyY(), m_f310.getRightJoyY(), m_f310.getRightJoyX()); }
       else { m_drivetrain.JoystickDrive(m_f310.getLeftJoyX(), -m_f310.getLeftJoyY(), m_f310.getRightJoyY(), m_f310.getRightJoyX()); }
     },
